@@ -1,0 +1,760 @@
+    1  sudo dnf update
+    2  sudo mv Nordic-Polar -usr
+    3  sudo mv Nordic-Polar /usr/share/themes
+    4  sudo mv Tela /usr/share/icons
+    5  ./nord.sh 
+    6  sudo su
+    7  sudo vi /etc/hostname
+    8  sudo vi /etc/hosts
+    9  sudo hostnamectl set-hostname hattusa
+   10  exit
+   11  gvim
+   12  vim
+   13  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+   14  vim +PluginInstall
+   15  vim
+   16  gvim +PluginInstall
+   17  gvim
+   18  sudo dnf install cmake gcc-c++ make python3-devel
+   19  cd ~/.vim/bundle/YouCompleteMe
+   20  python3 install.py
+   21  vim
+   22  git pull origin master
+   23  git clone https://github.com/jgregoriods/expand.git
+   24  cd expand/
+   25  git status
+   26  python3 app.py 
+   27  pip3 install matplotlib
+   28  sudo pip3 install matplotlib
+   29  python3 app.py 
+   30  sudo dnf install python3-tk
+   31  sudo dnf install python3-tkinter
+   32  python3 app.py 
+   33  sudo pip3 install tqdm
+   34  python3 app.py 
+   35  sudo pip3 install pyproj
+   36  python3 app.py 
+   37  sudo ./bin/mendeleydesktop 
+   38  python
+   39  python3
+   40  sudo ./bin/mendeleydesktop 
+   41  sudo dnf install gconf-editor
+   42  sudo ./bin/mendeleydesktop 
+   43  sudo dnf update
+   44  sudo ./bin/mendeleydesktop 
+   45  sudo dnf install mendeleydesktop
+   46  sudo dnf update
+   47  sudo ./bin/mendeleydesktop 
+   48  sudo rpm install mendeley
+   49  sudo rpm -i mendeleydesktop
+   50  sudo rpm -i mendeley
+   51  sudo dnf install qgis
+   52  sudo dnf install python3-qgis
+   53  sudo dnf install qgis-grass
+   54  sudo dnf install saga
+   55  sudo dnf update
+   56  ssh jalcaina@marvin.s.upf.edu
+   57  sudo mv korla /usr/share/icons
+   58  sudo mv ePapirus /usr/share/icons
+   59  sudo mv Papirus /usr/share/icons
+   60  sudo mv McMojave-circle-blue /usr/share/icons
+   61  sudo mv Flat-Remix-GTK-Blue-Darker-Solid /usr/share/themes
+   62  sudo mv Flat-Remix-Blue /usr/share/icons
+   63  cd R
+   64  cd isochRones/
+   65  vim
+   66  ssh jalcaina@marvin.s.upf.edu
+   67  cd expand/
+   68  gvim
+   69  cd ~/R/isochRones/
+   70  gvim isochrones.R 
+   71  sudo mv Nordic /usr/share/icons
+   72  sudo mv Zafiro-Icons-Classic /usr/share/icons
+   73  sudo mv Zafiro-Icons-Blue /usr/share/icons
+   74  cd ./.local
+   75  ls
+   76  cd share/
+   77  ls
+   78  exit
+   79  cd /usr/share/icons
+   80  ls
+   81  cd Nordic/
+   82  ñs
+   83  ls
+   84  cd Zafiro-Icons-Blue
+   85  cd ../Zafiro-Icons-Blue
+   86  ls
+   87  rm places
+   88  sudo rm -r places
+   89  ls
+   90  cd ../Nordic
+   91  sudo mv -r places ../Zafiro-Icons-Blue
+   92  sudo mv places ../Zafiro-Icons-Blue
+   93  sudo mv Places ../Zafiro-Icons-Blue/places
+   94  cd ../Zafiro-Icons-Blue
+   95  ls
+   96  cd places
+   97  ls
+   98  sudo mv Nordic-bluish-accent /usr/share/themes
+   99  sudo mv Nordic /usr/share/themes
+  100  cd /usr/share/icons
+  101  sudo rm -r Zafiro-Icons-Blue
+  102  cd ~/Do
+  103  cd ~/Downloads/
+  104  sudo mv Zafiro-Icons-Blue /usr/share/icons
+  105  cd ~/R/isochRones/
+  106  gvim isochrones.R 
+  107  cd ..
+  108  ls
+  109  gvim dateProb.R 
+  110  gvim clim.R 
+  111  R
+  112  sudo dnf install r
+  113  sudo dnf install R
+  114  R
+  115  ssh jalcaina@marvin.s.upf.edu
+  116  git clone https://github.com/OrancheloTeam/oranchelo-icon-theme.git
+  117  cd oranchelo-icon-theme/
+  118  ls
+  119  ./oranchelo-installer.sh 
+  120  sudo ./oranchelo-installer.sh 
+  121  git clone https://github.com/rudrab/Shadow.git
+  122  sudo mv Shadow /usr/share/icons
+  123  sudo dnf install gdal-config
+  124  sudo dnf install gdal
+  125  sudo dnf install libgdal
+  126  sudo dnf install libgdal-dev
+  127  sudo dnf install gdal-devel
+  128  sudo dnf install pkg-config
+  129  echo $PKG_CONFIG_PATH
+  130  cd /usr/local/lib/pkgconfig/
+  131  sudo dnf install pkgconfig
+  132  sudo dnf install proj-devel
+  133  cd R
+  134  R
+  135  git status
+  136  sudo dnf install numix-icon-theme
+  137  sudo dnf install numix-icon-theme-circle
+  138  git pull origin master
+  139  git stash
+  140  git pull origin master
+  141  python3 app
+  142  cd expand/
+  143  python3 app.py 
+  144  cd expand/
+  145  python3 app.py 
+  146  ssh jalcaina@marvin.s.upf.edu
+  147  cd expand/
+  148  python3
+  149  cd expand/
+  150  gvim GA_un.py
+  151  vim +PluginInstall
+  152  cd expand/
+  153  python3 app.py 
+  154  pyhton3
+  155  python3
+  156  python3 GA_un.py
+  157  python3 GA.py
+  158  ssh jalcaina@marvin.s.upf.edu
+  159  cd expand/
+  160  python3 GA_v2.py 
+  161  pip3 progress
+  162  pip3 install progress
+  163  sudo pip3 install progress
+  164  python3 GA_v2.py 
+  165  cd expand/
+  166  python3 GA_v2.py 
+  167  cd expand/
+  168  vim run_un.py 
+  169  cd expand/
+  170  python3 GA_v2.py 
+  171  cd expand/
+  172  python3 GA_v2.py 
+  173  git add .
+  174  git commit -m "add GA for single models"
+  175  git config --global user.email "jonas.gregorio@gmail.com"
+  176  git config --global user.name "jgregoriods"
+  177  git add .
+  178  git commit -m "add GA for single models"
+  179  git push origin master
+  180  sensoras
+  181  sensors
+  182  ssh jalcaina@marvin.s.upf.edu
+  183  cd expand/
+  184  python3 GA_v2.py 
+  185  python3
+  186  ssh jalcaina@marvin.s.upf.edu
+  187  cd expand/
+  188  python3 GA_v2.py 
+  189  cd expand/
+  190  python3 GA_v2.py 
+  191  ssh jalcaina@marvin.s.upf.edu
+  192  cd expand/
+  193  python3 GA_v2.py 
+  194  resorces
+  195  resources
+  196  cd expand/
+  197  python3 GA_v2.py 
+  198  git add .
+  199  git commit -m "add write model"
+  200  git push origin master
+  201  python3 app.py 
+  202  cd expand/
+  203  python3 app.py 
+  204  cd R
+  205  R
+  206  git status
+  207  git add .
+  208  git commit -m "change params"
+  209  git push origin master
+  210  cd expand/
+  211  vim params.py 
+  212  cd expand/
+  213  python3 app.py 
+  214  vim app.py 
+  215  cd expand/
+  216  python3 GA_v2.py 
+  217  cd expand/
+  218  python3 app.py 
+  219  R
+  220  R
+  221  cd R
+  222  R
+  223  cd expand/
+  224  python3 GA_v2.py 
+  225  cd expand/
+  226  python3 app.py 
+  227  cd expand/
+  228  cd expand/
+  229  python3 app.py 
+  230  cd R
+  231  R
+  232  python3
+  233  cd expand/
+  234  python3 GA_v2.py 
+  235  cd expand/
+  236  python3 app.py 
+  237  python3 GA_v2.py 
+  238  cd expand/
+  239  python3 GA_c
+  240  python3 GA_v2.py 
+  241  python4
+  242  python3
+  243  python3 GA_v2.py 
+  244  cd expand/
+  245  python3 GA_v2.py 
+  246  cd expand/
+  247  python3 GA_v2.py 
+  248  python3
+  249  cd expand/
+  250  python3
+  251  python3 GA_v2.py 
+  252  python3 GA_v2.py [
+  253  python3 GA_v2.py 
+  254  python3
+  255  cd expand/
+  256  python3 GA_v2.py 
+  257  cd expand/
+  258  python3 GA_v2.py 
+  259  scp -r pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  260  ssh jalcaina@marvin.s.upf.edu
+  261  scp -r pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  262  scp -r pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  263  cd ..
+  264  scp -r pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  265  sudo scp pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  266  sudo scp -r pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  267  python3
+  268  python
+  269  scp -r pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  270  cd expand/
+  271  python3 GA_v2.py 
+  272  ssh jalcaina@marvin.upf.s.edu
+  273  ssh jalcaina@marvin.s.upf.edu
+  274  sudo dnf copr enable dani/qgis
+  275  sudo dnf update
+  276  R
+  277  sudo dnf upgrade
+  278  cd expand/
+  279  python3 app.py 
+  280  cd expand/
+  281  ssh jalcaina@marvin.s.upf.edu
+  282  python3 app.py 
+  283  python3 GA_mx.py 
+  284  python3 app.py 
+  285  python3
+  286  python3 app.py 
+  287  git add .
+  288  git commit -m "add neural network"
+  289  git pull origin master
+  290  git push origin master
+  291  sudo dnf update
+  292  ssh jalcaina@marvin.s.upf.edu
+  293  git pull origin master
+  294  java -jar maxent.jar 
+  295  ssh jalcaina@marvin.s.upf.edu
+  296  exit
+  297  java -jar maxent.jar 
+  298  ssh jalcaina@marvin.s.upf.edu
+  299  exit
+  300  java -jar maxent.jar 
+  301  cd ..
+  302  cd expand/
+  303  vim GA_mx.py 
+  304  pthon3 GA_mx.py 
+  305  python3 GA_mx.py 
+  306  R
+  307  vim ~/R/isochRones/isochrones.R 
+  308  R
+  309  vim app.py 
+  310  python3 app.py 
+  311  python3 GA_mx.py 
+  312  R
+  313  cd R
+  314  R
+  315  exit
+  316  cd expand/
+  317  python3 app.py 
+  318  exit
+  319  ssh jalcaina@marvin.s.upf.edu
+  320  exit
+  321  python3
+  322  cd expand/
+  323  cd ~
+  324  tmux
+  325  exit
+  326  vim GA_mx.py 
+  327  python3 GA_mx.py 
+  328  vim GA_mx.py 
+  329  exit
+  330  exit
+  331  python3 GA_mx.py 
+  332  exit
+  333  vim GA_mx.py 
+  334  tmux
+  335  vim GA_mx.py 
+  336  exit
+  337  vim GA_mx.py 
+  338  python3 GA_mx.py 
+  339  cd expand/
+  340  vim GA_mx.py 
+  341  python3 app.py 
+  342  python3 GA_mx.py 
+  343  git add .
+  344  git commit -m "add write csv results to GA"
+  345  git push origin master
+  346  git add .
+  347  git commit -m "add write csv results to GA"
+  348  git push origin master
+  349  ssh jalcaina@marvin.s.upf.edu
+  350  exit
+  351  python3 app.py 
+  352  exit
+  353  cd R
+  354  R
+  355  cd expand/
+  356  python3 GA_mx.py 
+  357  python3 app.py 
+  358  exit
+  359  python3 app.py 
+  360  exit
+  361  python3 app.py 
+  362  exit
+  363  python3 app.py 
+  364  exit
+  365  R
+  366  cd expand/
+  367  python3 app.py 
+  368  cd expand/
+  369  python3 app.py 
+  370  cd R
+  371  R
+  372  ssh jalcaina@marvin.s.upf.edu
+  373  cd expand/
+  374  python3 GA_mx.py 
+  375  cd expand/
+  376  python3 GA_mx.py 
+  377  cd expand/
+  378  python3 app.py 
+  379  cd ../R
+  380  R
+  381  cd home
+  382  cd ~
+  383  ssh jalcaina@marvin.s.upf.edu
+  384  exit
+  385  scp jalcaina@marvin.s.upf.edu:/home/expand/pyproj /home/
+  386  scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/pyproj /home/
+  387  scp -r jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/pyproj /home/
+  388  sudo scp -r jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/pyproj /home/
+  389  exit
+  390  chown pyproj jgregoriods
+  391  chown jgregoriods pyproj
+  392  sudo chown jgregoriods pyproj
+  393  ssh jalcaina@marvin.s.upf.edu
+  394  exit
+  395  scp ~/expand jalcaina@marvin.s.upf.edu:/homes/users/jalcaina
+  396  scp -r ~/expand jalcaina@marvin.s.upf.edu:/homes/users/jalcaina
+  397  cd isochRones/
+  398  git status
+  399  git add .
+  400  git commit -m "add filtered prepare"
+  401  git push origin master
+  402  exit
+  403  git status
+  404  git add .
+  405  git commit -m "change dates, change K dependence on maxent, add tolerance"
+  406  git push origin master
+  407  cd ..
+  408  scp -r ~/pyproj jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  409  scp /home/jgregoriods/Downloads/to_marvin/expand.sh jalcaina@marvin.s.upf.edu:/homes/users/jalcaina
+  410  ssh jalcaina@marvin.s.upf.edu
+  411  exit
+  412  ssh jalcaina@marvi.s.upf.edu
+  413  ssh jalcaina@marvin.s.upf.edu
+  414  exit
+  415  scp jalcaina@marvin.s.upf.edu /home/jgregoriods
+  416  scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/GA.pyData /home/jgregoriods
+  417  pip3 install pickle
+  418  python3
+  419  R
+  420  ssh jalcaina@marvin.s.upf.edu
+  421  python3
+  422  cd ~/R
+  423  R
+  424  vim params.py 
+  425  python3 app.py 
+  426  sudo dnf update
+  427  exit
+  428  R
+  429  python3
+  430  ssh jalcaina@marvin.s.upf.edu
+  431  cd expand/
+  432  vim params.py 
+  433  python3 app.py 
+  434  cd expand/
+  435  vim params.py 
+  436  vim app.py 
+  437  python3 app.py 
+  438  R
+  439  cd R
+  440  R
+  441  R
+  442  exit
+  443  ssh jalcaina@marvin.s.upf.edu
+  444  scp jalcaina@marvin.s.upf.edu:/homes/users/expand/GA.pyData /home/jgregoriods
+  445  scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/GA.pyData /home/jgregoriods
+  446  python3
+  447  R
+  448  cd R
+  449  R
+  450  ssh jalcaina@marvin.s.upf.edu
+  451  exit
+  452  cd R
+  453  R
+  454  cd isochRones/
+  455  git status
+  456  git add .
+  457  git commit -m "change bootstrap to 999"
+  458  git push origin master
+  459  cd ~/expand/
+  460  git status
+  461  git add .
+  462  git commit -m "add write csv to GA, change return value of long iterations to 0"
+  463  git push origin maste
+  464  git push origin master
+  465  exit
+  466  tmux
+  467  exit
+  468  ssh jalcaina@marvin.s.upf.edu
+  469  scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/GA.csv /home/jgregoriods
+  470  scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/results/GA.csv /home/jgregoriods
+  471  ssh jalcaina@marvin.s.upf.edu
+  472  exit
+  473  java -jar maxent.sh
+  474  java -jar maxent.jar
+  475  R
+  476  sudo dnf update
+  477  exit
+  478  cd R
+  479  R
+  480  cd ..
+  481  cd expand/
+  482  vim params.py 
+  483  vim app.py 
+  484  python3 app.py 
+  485  cd ..
+  486  cd R
+  487  R
+  488  exit
+  489  sudo mv Bubble-Darker-Blue /usr/share/themes
+  490  sudo mv X-Arc-Darker/
+  491  sudo mv X-Arc-Darker /usr/share/themes
+  492  Babel1800
+  493  exit
+  494  cd ..
+  495  sudo mv Newaita /usr/share/icons
+  496  sudo mv Marwaita /usr/share/icons
+  497  sudo chown GA.csv jgregoriods
+  498  sudo chown jgregoriods GA.csv
+  499  ssh jgregorio@marvin.s.upf.edu
+  500  scp -r ~/expand jgregorio@marvin.s.upf.edu:/homes/users/jgregorio
+  501  cd expand/
+  502  ssh jgregorio@marvin.s.upf.edu
+  503  cd ..
+  504  scp -r pyproj jgregorio@marvin.s.upf.edu
+  505  scp -r pyproj jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand
+  506  cd Downloads/
+  507  cd to_marvin/
+  508  scp expand.sh jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand
+  509  ssh jgregorio@marvin.s.upf.edu
+  510  scp jgregorio@marvin.s.upf.edu:/homes/users/expand/results/GA.csv /home/expand
+  511  scp jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand/results/GA.csv /home/expand
+  512  sudo scp jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand/results/GA.csv /home/expand
+  513  sudo scp jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand/results/GA.csv /home/jgregoriods/expand
+  514  sudo scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/results/GA.csv /home/jgregoriods/expand
+  515  sudo scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/GA.pyData /home/jgregoriods/expand
+  516  scp jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/GA.pyData /home/jgregoriods/expand
+  517  scp jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand/GA.pyData /home/jgregoriods/expand
+  518  ls
+  519  exit
+  520  ssh jalcaina@marvin.s.upf.edu
+  521  exit
+  522  tmux
+  523  sudo mv mojave-dark /usr/share/themes
+  524  sudo mv Mojave-dark /usr/share/themes
+  525  Babel1800
+  526  sudo mv Qogir-win /usr/share/themes
+  527  sudo dnf install cairo-dock
+  528  cd arc-theme-master/
+  529  ls
+  530  cd ..
+  531  sudo mv arc-theme-master /usr/share/themes
+  532  sudo mv Flat-Remix-Dark-fullPanel/ /usr/share/themes
+  533  cd expand/
+  534  vim params.py 
+  535  exit
+  536  ssh jalcaina@marvin.s.upf.edu
+  537  exit
+  538  cd expand/
+  539  python3 app.py 
+  540  exit
+  541  python3 app.py 
+  542  cd ../R
+  543  R
+  544  exit
+  545  vim
+  546  cd expand/
+  547  vim village_un.py 
+  548  exit
+  549  vim
+  550  vim .vimrc
+  551  vim
+  552  vim .vimrc
+  553  vim +PluginInstall
+  554  vim
+  555  vim .vimrc
+  556  vim
+  557  vim .vimr
+  558  vim .vimrc
+  559  vim
+  560  vim .vimrc
+  561  vim +PluginInstall
+  562  :q
+  563  tmux
+  564  sudo dnf remove cairo
+  565  sudo dnf install cairo
+  566  exit
+  567  vim .vimrc
+  568  vim +PluginInstall
+  569  vim
+  570  cd expand/
+  571  vim village_un.py 
+  572  ls
+  573  sudo dnf install cairo
+  574  sudo dnf install gtk3
+  575  sudo dnf history
+  576  sudo dnf history undo 
+  577  sudo dnf history undo 31
+  578  systemctl restart gdm.service
+  579  sudo dnf install gdm
+  580  systemctl restart gdm.service
+  581  sudo dnf history
+  582  sudo dnf undo 32
+  583  sudo dnf history undo 32
+  584  sudo dnf history
+  585  sudo dnf install NetworkManager
+  586  sudo dnf remove gtk3
+  587  sudo dnf update
+  588  sudo dnf install gtk3
+  589  sudo dnf update
+  590  systemctl enable gdm.service
+  591  sudo dnf install gdm.service
+  592  sudo dnf install gdm
+  593  sudo dnf install gnome-terminal
+  594  systemctl enable gdm.service
+  595  systemctl gdm restart
+  596  systemctl restart gdm
+  597  sudo dnf install libreoffice
+  598  sudo dnf install nautilus
+  599  exit
+  600  tmux
+  601  R
+  602  sudo dnf install R
+  603  sudo dnf install tweaks
+  604  cd expand/
+  605  python3 app.py 
+  606  sudo dnf install gnome-tweak-tool
+  607  exit
+  608  sudo dnf install qgis python3-qgis qgis-grass qgis-server
+  609  exit
+  610  sudo dnf copr enable dany/qgis
+  611  sudo dnf copr enable dani/qgis
+  612  sudo dnf update
+  613  sudo dnf install firefox
+  614  sudo dnf update
+  615  exit
+  616  cd Downloads/
+  617  ls
+  618  cd mendeleydesktop-1.19.4-linux-x86_64/
+  619  ./bin/mendeleydesktop 
+  620  sudo dnf install gconf2
+  621  sudo dnf install GConf2
+  622  ./bin/mendeleydesktop 
+  623  sudo dnf install google-chrome
+  624  sudo dnf remove google-chrome
+  625  sudo dnf install rpm
+  626  rpm
+  627  sudo rmp install google-chrome
+  628  sudo rpm install google-chrome
+  629  sudo rpm -i google-chrome
+  630  rpm
+  631  sudo dnf config-manager  --set-enabled google-chrome
+  632  dnf install fedora-workstation-repositories
+  633  sudo dnf install fedora-workstation-repositories
+  634  sudo dnf install google-chrome-stable
+  635  ssh jgregorio@marvin.s.upf.edu
+  636  exit
+  637  ssh jalcaina@marvin.s.upf.edu
+  638  ssh jgregorio@marvin.s.upf.edu
+  639  exit
+  640  ls
+  641  tmux
+  642  sudo dnf update
+  643  sudo dnf install nautilus-action gnome-terminal
+  644  sudo dnf install nautilus-actions gnome-terminal
+  645  sudo dnf install nautilus-open-terminal
+  646  exit
+  647  sudo dnf update
+  648  exit
+  649  vim
+  650  git status
+  651  git add .
+  652  git commit -m "correct tolerance for adding cells in catchment"
+  653  git push origin master
+  654  exit
+  655  git status
+  656  git add .
+  657  git commit -m "change carib"
+  658  git push origin master
+  659  R
+  660  java -jar maxent.jar 
+  661  vim params.py 
+  662  vim app.py 
+  663  python3 app.py 
+  664  R
+  665  java -jar maxent.jar 
+  666  vim params.py 
+  667  vim run_un.py 
+  668  ssh jgregorio@marvin.s.upf.edu
+  669  scp -r /home/jgregoriods/expand/dates/tupi/ jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand/
+  670  ssh jgregorio@marvin.s.upf.edu
+  671  ssh jalcaina@marvin.s.upf.edu
+  672  scp -r /home/jgregoriods/expand/dates/tupi/ jalcaina@marvin.s.upf.edu:/homes/users/jgregorio/expand/dates
+  673  scp -r /home/jgregoriods/expand/dates/tupi/ jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand/dates
+  674  ssh jalcaina@marvin.s.upf.edu
+  675  ssh jgregorio@marvin.s.upf.edu
+  676  exit
+  677  vim params.py 
+  678  exit
+  679  ssh jgregorio@marvin.s.upf.edu
+  680  tmux
+  681  R
+  682  cd R
+  683  vim isochRones/isochrones.R 
+  684  R
+  685  tmux
+  686  cd expand/
+  687  vim params.py 
+  688  cd expand/
+  689  python3 app.py 
+  690  exit
+  691  python3 app.py 
+  692  exit
+  693  python3 app.py 
+  694  exit
+  695  python3 app.py 
+  696  exit
+  697  python3 app.py 
+  698  exit
+  699  python3 app.py 
+  700  ssh jgregorio@marvin.s.upf.edu
+  701  python3 app.py 
+  702  exit
+  703  python3 app.py 
+  704  exit
+  705  python3 app.py 
+  706  exit
+  707  python3 app.py 
+  708  exit
+  709  python3 app.py 
+  710  exit
+  711  python3 app.py 
+  712  exit
+  713  python3 app.py 
+  714  exit
+  715  python3 app.py 
+  716  exit
+  717  python3 app.py 
+  718  exit
+  719  R
+  720  java -jar maxent.jar 
+  721  python3 app.py 
+  722  exit
+  723  python3 app.py 
+  724  exit
+  725  cd expand/
+  726  vim
+  727  vim app.py 
+  728  ssh jgregorio@marvin.s.upf.edu
+  729  ssh jalcaina@marvin.s.upf.edu
+  730  scp expand/dates jalcaina@marvin.s.upf.edu:/users/homes/jalcaina/expand
+  731  scp -r expand/dates jalcaina@marvin.s.upf.edu:/users/homes/jalcaina/expand
+  732  scp -r expand/dates jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  733  scp -r expand/layers jalcaina@marvin.s.upf.edu:/homes/users/jalcaina/expand
+  734  scp -r expand/layers jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand
+  735  scp -r expand/dates jgregorio@marvin.s.upf.edu:/homes/users/jgregorio/expand
+  736  ssh jgregorio@marvin.s.upf.edu
+  737  cd R
+  738  R
+  739  cd ~/expand/
+  740  vim app.py 
+  741  ssh jgregorio@marvin.s.upf.edu
+  742  ssh jalcaina@marvin.s.upf.edu
+  743  exit
+  744  tmux
+  745  exit
+  746  vim
+  747  ssh jalcaina@marvin.s.upf.edu
+  748  vim
+  749  exit
+  750  ssh jgregorio@marvin.s.upf.edu
+  751  exit
+  752  tmux
+  753  exit
+  754  sudo mv Qogir /usr/share/icons
+  755  ssh jgregorio@marvin.s.upf.edu
+  756  vim GA_mx.py 
+  757  vim run_un.py 
+  758  exit
+  759  python3 GA_mx.py 
+  760  history > history_for_print.txt

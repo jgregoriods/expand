@@ -1,10 +1,11 @@
-from numpy import loadtxt
+import numpy as np
+from time import time
 from village import Village
-from utils import get_dates
+from utils import get_dates, to_lonlat, transform_coords
 
 
 class Model:
-    def __init__(self, params):
+    def __init__(self, start, params):
 
         self.width = 638
         self.height = 825
@@ -15,61 +16,40 @@ class Model:
         self.grid = {}
 
         # Start at earliest date in the model
-        self.bp = 4600
+        self.bp = start
 
         # Model parameters
         self.params = params
-        self.start_dates = [param[2] for param in self.params]
 
-        # Layers to keep track of land ownership and dates of arrival
-        # for each culture.
+        # Layers to keep track of agents, land ownership and dates
+        # of arrival for each culture.
         for y in range(self.height):
             for x in range(self.width):
-                self.grid[(x, y)] = {'owner': 0,
-                                     'arrival_time': {'arawak': 0,
-                                                      'carib': 0,
-                                                      'tupi': 0,
-                                                      'je': 0}}
+                self.grid[(x, y)] = {'agent': 0,
+                                     'owner': 0,
+                                     'arrival_time': 0}
 
         # Add layers with ecological niche of each culture.
-        for param in params:
-            breed_name = param[1]
-            layer = loadtxt('./layers/{}.asc'.format(breed_name), skiprows=6)
-            for y in range(self.height):
-                for x in range(self.width):
-                    self.grid[(x, y)][breed_name] = layer[y, x]
-                    # Prevent water cells from being settled.
-                    if layer[y, x] == -9999:
-                        self.grid[(x, y)]['owner'] = -1
+        layer = np.loadtxt('./layers/arawak.asc', skiprows=6)
+        for y in range(self.height):
+            for x in range(self.width):
+                self.grid[(x, y)]['env'] = layer[y, x]
+                # Prevent water cells from being settled.
+                if layer[y, x] == -9999:
+                    self.grid[(x, y)]['owner'] = -1
 
         self.setup_agents()
-
-    def next_id(self):
-        """
-        Generates continuous unique id values for agents.
-        Start at 1.
-        """
-        self.current_id += 1
-        return self.current_id
 
     def setup_agents(self):
         """
         Create a village for each culture, add land to their territory
         and record their start dates (not current year).
         """
-        for param in self.params:
-            if param[2] == self.bp:
-                village = Village(self.next_id(), self, *param)
-                self.agents[village._id] = village
-
-                # Make space for new village in case landscape is taken
-                neighbors = village.get_neighbors(village.catchment)
-                if neighbors:
-                    for _id in neighbors:
-                        self.agents[_id].abandon_land()
-                        del self.agents[_id]
-
-                village.claim_land(village.coords)
+        village = Village(self, **self.params)
+        self.agents[village._id] = village
+        self.grid[village.coords]['agent'] = village._id
+        village.claim_land(village.coords)
+        village.record_date()
 
     def eval(self):
         """
@@ -78,25 +58,35 @@ class Model:
         """
         total_score = 0
 
-        for param in self.params:
-            breed_name = param[1]
-            dates = get_dates(breed_name)
+        breed_name = self.params[1]
+        dates = get_dates(breed_name)
+
+        for coords in dates:
             score = 0
+            sim_date = self.grid[coords]['arrival_time']
+            if sim_date and sim_date in dates[coords]:
+                # Normalize probability distribution
+                score += (dates[coords][sim_date] /
+                          max(dates[coords].values()))
 
-            for coords in dates:
-                sim_date = self.grid[coords]['arrival_time'][breed_name]
-                if sim_date and sim_date in dates[coords]:
-                    # Normalize probability distribution
-                    score += (dates[coords][sim_date] /
-                              max(dates[coords].values()))
+            total_score += score
 
-            total_score += score / len(dates)
+        return total_score / len(dates)
 
-        return total_score / 4
+    def write(self):
+        timestamp = int(time())
+        filename = './results/res{}.csv'.format(str(timestamp))
+        breed = self.params[1]
+        with open(filename, 'w') as file:
+            file.write('breed,x,y,bp\n')
+            for coords in self.grid:
+                if self.grid[coords]['arrival_time']:
+                    bp = self.grid[coords]['arrival_time']
+                    x, y = to_lonlat(transform_coords(coords))
+                    file.write(str(breed) + ',' + str(x) + ',' + str(y) + ',' +
+                               str(bp) + '\n')
 
     def step(self):
-        if self.bp in self.start_dates:
-            self.setup_agents()
         agent_list = list(self.agents.keys())
         for _id in agent_list:
             self.agents[_id].step()

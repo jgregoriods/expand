@@ -6,17 +6,20 @@ class Village:
     Class used to represent a village in the model.
     """
 
-    def __init__(self, _id, model, coords, breed, start_date, k,
-                 fission_threshold, catchment, leap_distance, permanence):
+    village_counter = 1
 
-        self._id = _id
+    def __init__(self, model, coords, k,
+                 fission_threshold, catchment, leap_distance, permanence,
+                 tolerance):
+
+        self._id = Village.village_counter
+        Village.village_counter += 1
+
         self.active = True
 
         # Basic settings
         self.model = model
         self.coords = coords
-        self.breed = breed
-        self.start_date = start_date
 
         # Demographic parameters
         self.r = 0.025
@@ -38,6 +41,8 @@ class Village:
         self.permanence = permanence
         self.time_here = 0
 
+        self.tolerance = tolerance
+
     def get_neighborhood(self, radius):
         """
         Returns all the cells within a given radius from the
@@ -51,18 +56,18 @@ class Village:
                         if (self.get_distance((x, y)) <= radius and
                             x >= 0 and y >= 0)}
         return neighborhood
-    
+
     def get_neighbors(self, radius):
         """
-        Returns the ids of other villages within a given radius of the
-        village.
+        Returns the ids of all other villages within a given
+        radius of the village.
         """
-        neighbors = set()
+        neighbors = []
         neighborhood = self.get_neighborhood(radius)
         for cell in neighborhood:
-            if (neighborhood[cell]['owner'] > 0 and
-                neighborhood[cell]['owner'] != self._id):
-                neighbors.add(neighborhood[cell]['owner'])
+            if (neighborhood[cell]['agent'] and
+                    neighborhood[cell]['agent'] != self._id):
+                neighbors.append(neighborhood[cell]['agent'])
         return neighbors
 
     def get_destinations(self, distance):
@@ -87,15 +92,18 @@ class Village:
         """
         destinations = self.get_destinations(distance)
         if pioneer:
-            available_destinations = {cell: destinations[cell][self.breed]
+            available_destinations = {cell: destinations[cell]['env']
                                       for cell in destinations
                                       if not destinations[cell]['owner']
-                                      and not destinations[cell]
-                                      ['arrival_time'][self.breed]}
+                                      and (destinations[cell]['env'] >=
+                                           self.tolerance) 
+                                      and not destinations[cell]['arrival_time']}
         else:
-            available_destinations = {cell: destinations[cell][self.breed]
+            available_destinations = {cell: destinations[cell]['env']
                                       for cell in destinations
-                                      if not destinations[cell]['owner']}
+                                      if not destinations[cell]['owner']
+                                      and (destinations[cell]['env'] >=
+                                           self.tolerance)}
         return available_destinations
 
     def get_distance(self, next_coords):
@@ -126,8 +134,9 @@ class Village:
         while self.population > self.total_k:
             # Cells within catchment that are not owned.
             territory = self.get_neighborhood(self.catchment)
-            free_land = {cell: territory[cell][self.breed]
-                         for cell in territory if not territory[cell]['owner']}
+            free_land = {cell: territory[cell]['env']
+                         for cell in territory if not territory[cell]['owner']
+                         and territory[cell]['env'] >= self.tolerance}
 
             if free_land:
                 # Choose cell with highest suitability.
@@ -146,13 +155,13 @@ class Village:
 
         self.model.grid[coords]['owner'] = self._id
         self.land.append(coords)
+        self.total_k = self.k * len(self.land)
 
-        # K depends on the suitability of a cell.
-        self.total_k = sum([self.k * self.model.grid[cell][self.breed]
-                            for cell in self.land])
-
-        if not self.model.grid[coords]['arrival_time'][self.breed]:
-            self.model.grid[coords]['arrival_time'][self.breed] = self.model.bp
+    def record_date(self):
+        neighborhood = self.get_neighborhood(self.catchment)
+        for cell in neighborhood:
+            if not self.model.grid[cell]['arrival_time']:
+                self.model.grid[cell]['arrival_time'] = self.model.bp
 
     def check_fission(self):
         """
@@ -165,8 +174,8 @@ class Village:
         """
         if self.population >= self.fission_threshold:
             empty_land = self.get_empty_destinations(self.catchment * 2)
-
-            if empty_land:
+            neighbors = self.get_neighbors(self.catchment * 2)
+            if empty_land and len(neighbors) < 6:
                 new_village = self.fission()
                 self.model.agents[new_village._id] = new_village
                 new_village.move(empty_land)
@@ -178,26 +187,21 @@ class Village:
                 # Only perform leapfrogging if attractiveness of the
                 # destination is higher than current cell.
                 if (distant_land and max(distant_land.values()) >
-                        self.model.grid[self.coords][self.breed]):
+                        self.model.grid[self.coords]['env']):
                     new_village = self.fission()
                     self.model.agents[new_village._id] = new_village
                     new_village.move(distant_land)
-
-                else:
-                    self.active = False
-
-            else:
-                self.active = False
 
     def fission(self):
         """
         A new village is created with the same attributes as the parent
         village and half its population.
         """
-        new_village = Village(self.model.next_id(), self.model, self.coords,
-                              self.breed, self.start_date, self.k,
+        new_village = Village(self.model, self.coords,
+                              self.k,
                               self.fission_threshold, self.catchment,
-                              self.leap_distance, self.permanence)
+                              self.leap_distance, self.permanence,
+                              self.tolerance)
         self.population //= 2
         new_village.population = self.population
         return new_village
@@ -209,7 +213,11 @@ class Village:
         according to the population size.
         """
         new_home = max(neighborhood, key=neighborhood.get)
+        if self.model.grid[self.coords]['agent'] == self._id:
+            self.model.grid[self.coords]['agent'] = 0
         self.coords = new_home
+        self.model.grid[new_home]['agent'] = self._id
+        self.record_date()
         self.claim_land(new_home)
         self.update_land()
 
@@ -236,38 +244,16 @@ class Village:
                 self.abandon_land()
                 self.move(empty_land)
                 self.time_here = 0
-                self.migrated = True
-
-            elif self.leap_distance:
-                distant_land = self.get_empty_destinations(self.leap_distance,
-                                                           pioneer=True)
-
-                if (distant_land and max(distant_land.values()) >
-                        self.model.grid[self.coords][self.breed]):
-                    self.abandon_land()
-                    self.move(distant_land)
-                    self.time_here = 0
-
-                else:
-                    self.active = False
 
             else:
-                self.active = False
+                # self.active = False
+                self.time_here += 1
 
         else:
             self.time_here += 1
 
-    def check_death(self):
-        """
-        Removes the village from the model if it is inactive.
-        """
-        if not self.active:
-            self.abandon_land()
-            del self.model.agents[self._id]
-            del self
-
     def step(self):
-        self.grow()
-        self.check_fission()
-        self.check_move()
-        self.check_death()
+        if self.active:
+            self.grow()
+            self.check_fission()
+            self.check_move()

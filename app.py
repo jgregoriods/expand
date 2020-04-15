@@ -117,7 +117,7 @@ class App:
     def setup_model(self):
         self.params = {'coords': to_canvas(self.lon.get(), self.lat.get()), 'k': self.k.get(), 'fission_threshold': self.fiss.get(),
                        'catchment': self.catch.get() // 10, 'leap_distance': self.leap.get() // 10,
-                       'permanence': self.perm.get(), 'tolerance': 0.2}
+                       'permanence': self.perm.get(), 'tolerance': 0.48}
 
         self.running = True
         self.model = Model(start=self.start.get(),

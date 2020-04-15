@@ -30,12 +30,12 @@ class Model:
                                      'arrival_time': 0}
 
         # Add layers with ecological niche of each culture.
-        layer = np.loadtxt('./layers/arawak.asc', skiprows=6)
+        env = np.loadtxt('./layers/env.asc', skiprows=6)
         for y in range(self.height):
             for x in range(self.width):
-                self.grid[(x, y)]['env'] = layer[y, x]
+                self.grid[(x, y)]['env'] = env[y, x]
                 # Prevent water cells from being settled.
-                if layer[y, x] == -9999:
+                if env[y, x] == -9999:
                     self.grid[(x, y)]['owner'] = -1
 
         self.setup_agents()

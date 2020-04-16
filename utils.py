@@ -12,22 +12,20 @@ albers = pyproj.Proj("+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 \
                      +units=m +no_defs")
 
 
-def get_dates(name):
+def get_dates():
     dates = {}
-    for filename in os.listdir('./dates/{}'.format(name)):
+    for filename in os.listdir('./dates/'):
         global x, y
-        new_dates = {}
-        with open('./dates/{}/{}'.format(name, filename)) as csv_file:
+        with open('./dates/{}'.format(filename)) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
-                if line_count == 1:
-                    x, y = to_canvas(float(row[1]), float(row[2]))
-                    new_dates[(x, y)] = {}
-                elif line_count > 1:
-                    new_dates[(x, y)][int(row[1])] = float(row[2])
+                if line_count == 0:
+                    x, y = to_canvas(float(row[0]), float(row[1]))
+                    dates[(x, y)] = {}
+                else:
+                    dates[(x, y)][int(row[0])] = float(row[1])
                 line_count += 1
-            dates.update(new_dates)
     return dates
 
 
@@ -48,17 +46,3 @@ def to_canvas(x, y):
     x_canvas = int((albers(x, y)[0] + 2985163.8955) / 10000)
     y_canvas = int((5227968.786 - albers(x, y)[1]) / 10000)
     return x_canvas, y_canvas
-
-
-def write_results(model):
-    timestamp = int(time.time())
-    result_name = './results/res{}.csv'.format(str(timestamp))
-    with open(result_name, 'w') as result_file:
-        result_file.write('x,y,bp,breed\n')
-        for coords in model.grid:
-            if model.grid[coords]['arrival_time']:
-                bp = model.grid[coords]['arrival_time'][0]
-                breed = model.grid[coords]['arrival_time'][1]
-                x, y = to_lonlat(transform_coords(coords))
-                result_file.write(str(x) + ',' + str(y) + ',' + str(bp) + ',' +
-                                  str(breed) + '\n')

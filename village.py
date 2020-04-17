@@ -3,14 +3,14 @@ from math import hypot
 
 class Village:
     """
-    Class used to represent a village in the model.
+    Class used to represent a village agent in the model.
     """
 
+    # Unique id for each village
     village_counter = 1
 
-    def __init__(self, model, coords, k,
-                 fission_threshold, catchment, leap_distance, permanence,
-                 tolerance):
+    def __init__(self, model, coords, k, fission_threshold, catchment,
+                 leap_distance, permanence, tolerance):
 
         self._id = Village.village_counter
         Village.village_counter += 1
@@ -26,7 +26,7 @@ class Village:
         self.k = k
         self.total_k = 0
 
-        # Initialize village at saturation point
+        # Initialize village at max population before fission
         self.population = fission_threshold
 
         # Territory and movement parameters
@@ -41,6 +41,7 @@ class Village:
         self.permanence = permanence
         self.time_here = 0
 
+        # Minimum env value acceptable for settling
         self.tolerance = tolerance
 
     def get_neighborhood(self, radius):
@@ -94,16 +95,16 @@ class Village:
         if pioneer:
             available_destinations = {cell: destinations[cell]['env']
                                       for cell in destinations
-                                      if not destinations[cell]['owner']
-                                      and (destinations[cell]['env'] >=
-                                           self.tolerance) 
-                                      and not destinations[cell]['arrival_time']}
+                                      if not destinations[cell]['owner'] and
+                                      (destinations[cell]['env'] >=
+                                       self.tolerance) and
+                                      not destinations[cell]['arrival_time']}
         else:
             available_destinations = {cell: destinations[cell]['env']
                                       for cell in destinations
-                                      if not destinations[cell]['owner']
-                                      and (destinations[cell]['env'] >=
-                                           self.tolerance)}
+                                      if not destinations[cell]['owner'] and
+                                      (destinations[cell]['env'] >=
+                                       self.tolerance)}
         return available_destinations
 
     def get_distance(self, next_coords):
@@ -125,21 +126,21 @@ class Village:
 
     def update_land(self):
         """
-        Calculates total K from all cells owned by the village. In case
-        population exceeds total K, tries to add new cells. If
-        population is still beyond K after adding all available cells,
-        population is reduced back to total K and the village becomes
-        inactive.
+        Calculates total K* from all cells owned by the village. In
+        case population exceeds total K*, tries to add new cells. If
+        population is still beyond K* after adding all available
+        cells, population is reduced back to total K* and the
+        village becomes inactive.
         """
         while self.population > self.total_k:
-            # Cells within catchment that are not owned.
+            # Cells within catchment that are not owned
             territory = self.get_neighborhood(self.catchment)
             free_land = {cell: territory[cell]['env']
                          for cell in territory if not territory[cell]['owner']
                          and territory[cell]['env'] >= self.tolerance}
 
             if free_land:
-                # Choose cell with highest suitability.
+                # Choose cell with highest suitability
                 new_land = max(free_land, key=free_land.get)
                 self.claim_land(new_land)
 
@@ -149,15 +150,16 @@ class Village:
 
     def claim_land(self, coords):
         """
-        Claims a cell for the village, updates total carrying capacity
-        and records the simulated date.
+        Claims a cell for the village and updates total K*.
         """
-
         self.model.grid[coords]['owner'] = self._id
         self.land.append(coords)
         self.total_k = self.k * len(self.land)
 
     def record_date(self):
+        """
+        Records the simulated date of arrival.
+        """
         neighborhood = self.get_neighborhood(self.catchment)
         for cell in neighborhood:
             if not self.model.grid[cell]['arrival_time']:
@@ -166,11 +168,10 @@ class Village:
     def check_fission(self):
         """
         If population is above fission threshold and there are
-        available cells outside its catchment, the village fissions and
-        the daughter village moves away. If there are no empty cells
-        but leapfrogging is allowed, another search is performed for
-        leap distance. If there is no possibility of moving, the
-        village becomes inactive.
+        available cells outside its catchment, the village fissions
+        and the daughter village moves away. If there are no empty
+        cells but leapfrogging is allowed, another search is
+        performed for leap distance.
         """
         if self.population >= self.fission_threshold:
             empty_land = self.get_empty_destinations(self.catchment * 2)
@@ -185,7 +186,7 @@ class Village:
                                                            pioneer=True)
 
                 # Only perform leapfrogging if attractiveness of the
-                # destination is higher than current cell.
+                # destination is higher than current cell
                 if (distant_land and max(distant_land.values()) >
                         self.model.grid[self.coords]['env']):
                     new_village = self.fission()
@@ -194,8 +195,8 @@ class Village:
 
     def fission(self):
         """
-        A new village is created with the same attributes as the parent
-        village and half its population.
+        A new village is created with the same attributes as the
+        parent village and half its population.
         """
         new_village = Village(self.model, self.coords,
                               self.k,
@@ -231,11 +232,11 @@ class Village:
 
     def check_move(self):
         """
-        If settled beyond maximum permanence time in a given location,
-        the village searches for available cells beyond its catchment
-        to move. If no cells are available but leapfrogging is allowed,
-        another search is performed for leap distance. When there is no
-        possibility of moving, the village becomes inactive.
+        If settled beyond maximum permanence time in a given
+        location, the village searches for available cells beyond
+        its catchment to move. If no cells are available but
+        leapfrogging is allowed, another search is performed for
+        leap distance.
         """
         if self.time_here >= self.permanence:
             empty_land = self.get_empty_destinations(self.catchment * 2)

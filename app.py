@@ -119,7 +119,7 @@ class App:
         self.eval_button.grid(row=2, column=3)
 
         # South America elevation map as a background
-        self.basemap = np.vstack(np.loadtxt('./layers/eleAlbers.asc',
+        self.basemap = np.vstack(np.loadtxt('./layers/ele.asc',
                                             skiprows=6).astype(float))
         self.basemap[self.basemap == -9999] = np.nan
 
@@ -176,6 +176,7 @@ class App:
         self.ax.set_facecolor('black')
         self.ax.imshow(self.basemap, cmap='cividis')
 
+        # Color scale for villages based on population
         self.ax.scatter(*zip(*self.points), s=1, c=self.pop, cmap='Wistia',
                         vmin=0, vmax=self.fiss.get())
 

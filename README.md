@@ -8,3 +8,4 @@ pip3 install pyproj tqdm matplotlib</pre></code>
 <h3>Running the model</h3>
 <p>In the code that is made available here, the model can be run from a GUI:</p>
 <pre><code>python3 run.py</pre></code>
+<img src="img/screen.png" width=600></img>

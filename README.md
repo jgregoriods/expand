@@ -1,12 +1,15 @@
 # ExPaND
 <h2>Simulating demic expansion of farmers in tropical South America</h2>
+<img src="img/anim.gif" align="right" width=150></img>
 <p>This is an agent-based model for simulating the demic expansion of tropical forest farmers in late Holocene South America. Over the last 5000 years, archaeological cultures like the Saladoid-Barrancoid and Tupiguarani expanded over different parts of Amazon and beyond, spreading the practice of polyculture agroforestry. Can these archaeological expansions be modelled as demic waves of advance similar to what has been proposed for the Neolithic in Eurasia? Model results are assessed by comparing simulated arrival times with radiocarbon dates. Similar models, where human expansions are determined by population growth, fission and relocation, have been developed for the spread of farming in Europe (Fort et al. 2012; Isern et al. 2017). The same concept is adopted here, with the rules of the model informed by the ethnography of tropical forest farmers. For a complete description of the model, see Souza et al. (2020).</p>
 <h3>Installation</h3>
 <p>Clone or download the repository. There are some dependencies that need to be installed:</p>
 <pre><code>sudo apt-get install python3-tk
 pip3 install pyproj tqdm matplotlib</pre></code>
 <h3>Model architecture</h3>
-<p>Expansions ...</p>
+<p>Expansions result from the interaction between population growth, village fission and village relocation. Each village has a territory within a <i>catchment radius</i> and a <i>maximum population density</i> (<i>K*</i>). The population grows at a rate of 2.5% per year. If the population is above the maximum density, more cells (10 x 10 km) are added to its territory. When the village population is above a certain <i>threshold</i> and there are free cells outside of its catchment, it fissions, giving birth to a new village. If a village has been in its location beyond a <i>maximum permanence time</i>, it also looks for free cells outside its catchment to move. Finally, villages have the option to <i>leapfrog</i>: if there are no free cells in the immediate neighbourhood, they can jump over longer distances.</p>
+<p>The model starts with a village whose population is at the fission threshold, so that it immediately fissions and starts the expansion.</p>
+<p>When fissioning or moving, villages choose the best cell according to a suitability layer. Here, a layer env.asc is provided in the <code>/layers</code> folder for illustrative purposes. The layer was created using MaxEnt and sites from different archaeological cultures of tropical forest farmers as presence points. In the code, a parameter <code>tolerance</code> is passed to the agents, determining the minimum value for a cell to be settled. In this version, the value 0.4 was used, which is slightly below the maximum training sensitivity plus specificity threshold of the MaxEnt results, so the inhabitable territory was less restricted.</p>
 <h3>Running the model</h3>
 <p>In the code that is made available here, the model can be run from a GUI:</p>
 <pre><code>python3 run.py</pre></code>

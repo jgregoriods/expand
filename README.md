@@ -5,7 +5,8 @@
 <p>Clone or download the repository. There are some dependencies that need to be installed:</p>
 <pre><code>sudo apt-get install python3-tk
 pip3 install pyproj tqdm matplotlib</pre></code>
-<h3></3>
+<h3>Model architecture</h3>
+<p>Expansions ...</p>
 <h3>Running the model</h3>
 <p>In the code that is made available here, the model can be run from a GUI:</p>
 <pre><code>python3 run.py</pre></code>

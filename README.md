@@ -21,7 +21,7 @@ pip3 install pyproj tqdm matplotlib</pre></code>
 <p>You can save the results to be used in other software by clicking <code>Write</code>. This creates two files in the <code>/results</code> folder: one starting with <code>sim...</code> containing the simulated arrival times and the other starting with <code>dates...</code> containing the intercepted probability densities.</p>
 <p>Here is a quick plot in R with the results of the model we just ran:</p>
 <img src="img/simplot.jpg" width=300></img>
-<p>Here, the black dots are locations where the simulated arrival times are within the calibrated ranges of the actual dates, whereas the white dots are locations where the calibrated dates have not been intercepted by the simulation (see similar plots in Isern et al. 2017; Souza et al. 2020). The code for making this plot is available here.</p>
+<p>Here, the white dots are locations where the simulated arrival times are within the calibrated ranges of the actual dates, whereas the black dots are locations where the calibrated dates have not been intercepted by the simulation (see similar plots in Isern et al. 2017; Souza et al. 2020). The code for making this plot is available here.</p>
 <p>Be aware that the comparison above was for illustrative purposes only. Dates from several different cultures were used, hence the poor correlation with the simulated arrival times.</p>
 <h3>References</h3>
 <p>Fort, Joaquim, Toni Pujol, and Marc Vander Linden. 2012. <a href="https://doi.org/10.7183/0002-7316.77.2.203">“Modelling the Neolithic Transition in the Near East and Europe.”</a> American Antiquity 77 (2): 203–19.</p>

@@ -9,6 +9,11 @@ class Village:
     # Unique id for each village
     village_counter = 1
 
+    # Memoized grid "masks" to speed up the calculation of
+    # neighborhoods and destinations
+    dist_mask = {}
+    neighbor_mask = {}
+
     def __init__(self, model, coords, k, fission_threshold, catchment,
                  leap_distance, permanence, tolerance):
 
@@ -49,13 +54,18 @@ class Village:
         Returns all the cells within a given radius from the
         village.
         """
-        neighborhood = {(x, y): self.model.grid[(x, y)]
-                        for x in range(self.coords[0] - radius,
-                                       self.coords[0] + radius + 1)
-                        for y in range(self.coords[1] - radius,
-                                       self.coords[1] + radius + 1)
-                        if (self.get_distance((x, y)) <= radius and
-                            x >= 0 and y >= 0)}
+        if radius not in Village.neighbor_mask:
+            Village.neighbor_mask[radius] = [(i, j) for i in range(-radius, radius + 1)
+                                             for j in range(-radius, radius + 1)
+                                             if self.get_distance((self.coords[0] + i,
+                                                                   self.coords[1] + j)) <= radius]
+
+        neighborhood = {(self.coords[0] + cell[0], self.coords[1] + cell[1]):
+                         self.model.grid[(self.coords[0] + cell[0],
+                                          self.coords[1] + cell[1])]
+                         for cell in Village.neighbor_mask[radius]
+                         if (self.coords[0] + cell[0],
+                             self.coords[1] + cell[1]) in self.model.grid}
         return neighborhood
 
     def get_neighbors(self, radius):
@@ -76,13 +86,18 @@ class Village:
         Returns all the cells that are at a given distance from the
         village.
         """
-        destinations = {(x, y): self.model.grid[(x, y)]
-                        for x in range(self.coords[0] - distance,
-                                       self.coords[0] + distance + 1)
-                        for y in range(self.coords[1] - distance,
-                                       self.coords[1] + distance + 1)
-                        if (self.get_distance((x, y)) == distance and
-                            x >= 0 and y >= 0)}
+        if distance not in Village.dist_mask:
+            Village.dist_mask[distance] = [(i, j) for i in range(-distance, distance + 1)
+                                           for j in range(-distance, distance + 1)
+                                           if self.get_distance((self.coords[0] + i,
+                                                                 self.coords[1] + j)) == distance]
+
+        destinations = {(self.coords[0] + cell[0], self.coords[1] + cell[1]):
+                         self.model.grid[(self.coords[0] + cell[0],
+                                          self.coords[1] + cell[1])]
+                         for cell in Village.dist_mask[distance]
+                         if (self.coords[0] + cell[0],
+                             self.coords[1] + cell[1]) in self.model.grid}
         return destinations
 
     def get_empty_destinations(self, distance, pioneer=False):

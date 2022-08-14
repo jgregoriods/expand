@@ -9,8 +9,8 @@ class Village:
     # Unique id for each village
     village_counter = 1
 
-    # Memoized grid "masks" to speed up the calculation of
-    # neighborhoods and destinations
+    # Memoized grid "masks" to speed up the calculation of neighborhoods and
+    # destinations
     dist_mask = {}
     neighbor_mask = {}
 
@@ -51,8 +51,7 @@ class Village:
 
     def get_neighborhood(self, radius):
         """
-        Returns all the cells within a given radius from the
-        village.
+        Returns all the cells within a given radius from the village.
         """
         if radius not in Village.neighbor_mask:
             Village.neighbor_mask[radius] = [(i, j) for i in range(-radius, radius + 1)
@@ -70,8 +69,7 @@ class Village:
 
     def get_neighbors(self, radius):
         """
-        Returns the ids of all other villages within a given
-        radius of the village.
+        Returns the ids of all other villages within a given radius of the village.
         """
         neighbors = []
         neighborhood = self.get_neighborhood(radius)
@@ -83,8 +81,7 @@ class Village:
 
     def get_destinations(self, distance):
         """
-        Returns all the cells that are at a given distance from the
-        village.
+        Returns all the cells that are at a given distance from the village.
         """
         if distance not in Village.dist_mask:
             Village.dist_mask[distance] = [(i, j) for i in range(-distance, distance + 1)
@@ -102,9 +99,8 @@ class Village:
 
     def get_empty_destinations(self, distance, pioneer=False):
         """
-        Returns all cells at a given distance that are not owned.
-        If in pioneer mode, restricts the search to cells that have
-        never been claimed.
+        Returns all cells at a given distance that are not owned. If in pioneer
+        mode, restricts the search to cells that have never been claimed.
         """
         destinations = self.get_destinations(distance)
         if pioneer:
@@ -124,8 +120,7 @@ class Village:
 
     def get_distance(self, next_coords):
         """
-        Returns the distance (in cells) from the village to a pair of
-        coordinates.
+        Returns the distance (in cells) from the village to a pair of coordinates.
         """
         x, y = self.coords
         next_x, next_y = next_coords
@@ -133,19 +128,18 @@ class Village:
 
     def grow(self):
         """
-        Population grows exponentially. Update land is called to add
-        new cells in case population is above K.
+        Population grows exponentially. Update land is called to add new cells
+        in case population is above K.
         """
         self.population += round(self.r * self.population)
         self.update_land()
 
     def update_land(self):
         """
-        Calculates total K* from all cells owned by the village. In
-        case population exceeds total K*, tries to add new cells. If
-        population is still beyond K* after adding all available
-        cells, population is reduced back to total K* and the
-        village becomes inactive.
+        Calculates total K* from all cells owned by the village. In case
+        population exceeds total K*, tries to add new cells. If population is
+        still beyond K* after adding all available cells, population is reduced
+        back to total K* and the village becomes inactive.
         """
         while self.population > self.total_k:
             # Cells within catchment that are not owned
@@ -182,11 +176,10 @@ class Village:
 
     def check_fission(self):
         """
-        If population is above fission threshold and there are
-        available cells outside its catchment, the village fissions
-        and the daughter village moves away. If there are no empty
-        cells but leapfrogging is allowed, another search is
-        performed for leap distance.
+        If population is above fission threshold and there are available cells
+        outside its catchment, the village fissions and the daughter village
+        moves away. If there are no empty cells but leapfrogging is allowed,
+        another search is performed for leap distance.
         """
         if self.population >= self.fission_threshold:
             empty_land = self.get_empty_destinations(self.catchment * 2)
@@ -200,8 +193,8 @@ class Village:
                 distant_land = self.get_empty_destinations(self.leap_distance,
                                                            pioneer=True)
 
-                # Only perform leapfrogging if attractiveness of the
-                # destination is higher than current cell
+                # Only perform leapfrogging if attractiveness of the destination
+                # is higher than current cell
                 if (distant_land and max(distant_land.values()) >
                         self.model.grid[self.coords]['env']):
                     new_village = self.fission()
@@ -210,11 +203,10 @@ class Village:
 
     def fission(self):
         """
-        A new village is created with the same attributes as the
-        parent village and half its population.
+        A new village is created with the same attributes as the parent village
+        and half its population.
         """
-        new_village = Village(self.model, self.coords,
-                              self.k,
+        new_village = Village(self.model, self.coords, self.k,
                               self.fission_threshold, self.catchment,
                               self.leap_distance, self.permanence,
                               self.tolerance)
@@ -224,9 +216,9 @@ class Village:
 
     def move(self, neighborhood):
         """
-        Moves the village to the cell with highest suitability in a
-        given neighborhood. After moving, the village claims cells
-        according to the population size.
+        Moves the village to the cell with highest suitability in a given
+        neighborhood. After moving, the village claims cells according to the
+        population size.
         """
         new_home = max(neighborhood, key=neighborhood.get)
         if self.model.grid[self.coords]['agent'] == self._id:
@@ -247,11 +239,10 @@ class Village:
 
     def check_move(self):
         """
-        If settled beyond maximum permanence time in a given
-        location, the village searches for available cells beyond
-        its catchment to move. If no cells are available but
-        leapfrogging is allowed, another search is performed for
-        leap distance.
+        If settled beyond maximum permanence time in a given location, the
+        village searches for available cells beyond its catchment to move. If
+        no cells are available but leapfrogging is allowed, another search is
+        performed for leap distance.
         """
         if self.time_here >= self.permanence:
             empty_land = self.get_empty_destinations(self.catchment * 2)

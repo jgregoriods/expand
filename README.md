@@ -58,7 +58,7 @@ score: 0.57
 >>> model.write()
 ```
 
-You can also run from the command lineby using the following arguments:
+You can also run from the command line by using the following arguments:
 
 ```
 python3 run.py --start=4600 --x=-65.77 --y=7.82 --k=30 --fiss=70 --catch=10 --leap=150 --perm=15 --tol=0.3 --iter=4100 --write --eval --show-bar

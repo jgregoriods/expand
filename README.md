@@ -38,7 +38,7 @@ pip3 install -r requirements.txt
     'tolerance': 0.3
 }
 >>> model = Model(start_date, params)
->>> model.run(4100, show_progress=True)
+>>> model.run(4100, show_prog=True)
 100%|██████████████████████████████████████| 4100/4100 [00:08<00:00, 507.48it/s]
 ```
 

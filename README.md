@@ -25,10 +25,10 @@ pip3 install -r requirements.txt
 <p>For now, let's set the start date to 4600 BP and the initial coordinates to -65.77 7.82 (approximate coordinates of La Gruta, which potentially contains some of the earliest Saladoid-Barrancoid ceramics).</p>
 
 ```python
->>> from model import Model
+from model import Model
 
->>> start_date = 4600
->>> params = {
+start_date = 4600
+params = {
     'coords': (-65.77, 7.82),
     'k': 30,
     'fission_threshold': 70,
@@ -37,9 +37,8 @@ pip3 install -r requirements.txt
     'permanence': 15,
     'tolerance': 0.3
 }
->>> model = Model(start_date, params)
->>> model.run(4100, show_prog=True)
-100%|██████████████████████████████████████| 4100/4100 [00:08<00:00, 507.48it/s]
+model = Model(start_date, params)
+model.run(4100, show_prog=True)
 ```
 
 <p>The results of the model can be evaluated by comparing simulated arrival times with radiocarbon dates in different regions. The calibrated dates you want to use for comparison must be placed in the folder <code>/dates</code>. Files must be in .csv format with two columns, one for each date, with a first row containing XY coordinates for the dated site in lonlat format and the remaining rows containing years BP and the respective probability densities.</p>
@@ -47,15 +46,14 @@ pip3 install -r requirements.txt
 <p>The result is a score from 0 to 1 obtained by averaging the intercepted normalised probability at each dated site (or 0 if the simulated arrival time is outside of the calibrated distribution).</p>
 
 ```python
->>> score = model.eval()
->>> print('score:', round(score, 2))
-score: 0.57
+score = model.eval()
+print('score:', round(score, 2))
 ```
 
 <p>You can save the results to be used in other software. This creates two files in the <code>/results</code> folder: one starting with <code>sim...</code> containing the simulated arrival times and the other starting with <code>dates...</code> containing the intercepted probability densities.</p>
 
 ```python
->>> model.write()
+model.write()
 ```
 
 You can also run from the command line by using the following arguments:
